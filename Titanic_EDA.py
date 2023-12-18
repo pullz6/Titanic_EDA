@@ -34,8 +34,10 @@ df1_survived = df[df.Survived==1]
 df1_lost = df[df.Survived==0]
 print("Passengers Survived")
 print(df1_survived.groupby('Cabin').size())
+cv_survived = df1_survived.groupby('Cabin').size().reset_index()
 print("Passengers Lost")
 print(df1_lost.groupby('Cabin').size())
+cv_lost = df1_lost.groupby('Cabin').size().reset_index()
 
 print(df.info())
 print("Cabins")
@@ -61,18 +63,15 @@ plt.show()
 # Read Images
 cv2.namedWindow("output", cv2.WINDOW_NORMAL)
 img = cv2.imread('titanic.jpeg')
-imS = cv2.resize(img, (960, 540))                # Resize image
-cv2.imshow("output", imS)                       # Show image
-cv2.waitKey(0)    
+imS = cv2.resize(img, (960, 540))                # Resize image   
 
 # make a copy of the original image
-imageRectangle = imS.copy()
-# define the starting and end points of the rectangle
-start_point =(300,115)
-end_point =(275,448)
-# draw the rectangle
-cv2.rectangle(imageRectangle, start_point, end_point, (0, 0, 255), thickness= 3, lineType=cv2.LINE_8) 
-# display the output
-cv2.imshow('imageRectangle', imageRectangle)
+imageLine = imS.copy()
+pointA = (254,468)
+pointB = (400,468)
+cv2.arrowedLine(imageLine, pointB, pointA, (0, 255, 0), thickness=2)
+cv2.imshow('Image Line', imageLine)
 cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 
